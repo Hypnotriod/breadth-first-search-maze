@@ -42,7 +42,13 @@ const getRandomMaze = (width, height) => {
   for (let y = 0; y < height; y++) {
     maze[y] = [];
     for (let x = 0; x < width; x++) {
-      maze[y][x] = Math.round(Math.random() * 0.75);
+	  if ((x % 2) && (y % 2)) {
+	    maze[y][x] = 1;
+	  } else if (!(x % 2) && !(y % 2)) {
+	    maze[y][x] = 0;
+	  } else {
+	    maze[y][x] = Math.round(Math.random() * 0.9);
+	  }
     }
   }
   return maze;
@@ -51,8 +57,8 @@ const getRandomMaze = (width, height) => {
 let maze;
 let shortestPath;
 while (true) {
-  maze = getRandomMaze(78, 50);
-  shortestPath = breadthFirstSearch(maze, { x: 0, y: 0 }, { x: 77, y: 49 });
+  maze = getRandomMaze(77, 49);
+  shortestPath = breadthFirstSearch(maze, { x: 0, y: 0 }, { x: 76, y: 48 });
   if (shortestPath.length) break;
 }
 drawMaze(maze, shortestPath);
